@@ -1,0 +1,10 @@
+jobs:
+  main:
+    steps:
+      - run: echo hello
+on:
+  execute:
+    inputs:
+      test:
+        type: string
+        optional: true
