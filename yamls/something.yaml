@@ -1,0 +1,10 @@
+jobs:
+  main:
+    steps:
+      - run: echo something ${{ inputs.test2 ?? hello }}
+on:
+  execute:
+    inputs:
+      test2:
+        type: string
+        optional: true
