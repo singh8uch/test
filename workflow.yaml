@@ -1,7 +1,7 @@
 jobs:
   main:
     steps:
-      - run: echo hello
+      - run: echo ${{ inputs.test ?? hello }}
 on:
   execute:
     inputs:
