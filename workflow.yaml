@@ -2,6 +2,10 @@ jobs:
   main:
     steps:
       - run: echo ${{ inputs.test ?? hello }}
+      - uses: github/singh8uch/test@main
+        with:
+          $yaml: yamls/something.yaml
+          test: ${{ inputs.test ?? hello }}
 on:
   execute:
     inputs:
