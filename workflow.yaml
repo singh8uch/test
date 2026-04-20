@@ -11,4 +11,4 @@ on:
     inputs:
       test:
         type: string
-        optional: true
+        optional: false
