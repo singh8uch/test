@@ -1,0 +1,13 @@
+'on':
+  execute:
+    inputs: {}
+jobs:
+  verify:
+    steps:
+      - name: list checked-out files
+        run: |
+          echo "PWD=$(pwd)"
+          echo "===LS==="
+          ls -la
+          echo "===FIND (repo files, excluding .git + job-setup)==="
+          find . -maxdepth 3 -not -path '*/.git*' -not -name 'inputs.*' -not -name 'logs*' -not -path '*/logs/*'
