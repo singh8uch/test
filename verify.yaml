@@ -4,10 +4,10 @@
 jobs:
   verify:
     steps:
-      - name: list checked-out files
+      - name: locate checked-out files anywhere in the run tree
         run: |
           echo "PWD=$(pwd)"
-          echo "===LS==="
-          ls -la
-          echo "===FIND (repo files, excluding .git + job-setup)==="
-          find . -maxdepth 3 -not -path '*/.git*' -not -name 'inputs.*' -not -name 'logs*' -not -path '*/logs/*'
+          root="$(pwd | sed -E 's#(.*/jobs/[^/]+).*#\1#')"
+          echo "RUN_ROOT=$root"
+          echo "=== checked-out repo files found under run root ==="
+          find "$root" -maxdepth 8 \( -name 'json.yaml' -o -name 'workflow.yaml' -o -name 'something.yaml' -o -name 'verify.yaml' \) 2>/dev/null
