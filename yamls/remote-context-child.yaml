@@ -1,0 +1,17 @@
+# Fixture for the ${{ remote.* }} expression context (CORE-4858).
+# Called from singh8uch/privatetest@remote-context; this file is the remote child,
+# so it must report singh8uch/test@main and not its caller's repo or branch.
+jobs:
+  child:
+    steps:
+      - name: remote child reports its own remote context
+        run: |
+          echo "CHILD repo=${{ remote.repo }}"
+          echo "CHILD branch=${{ remote.branch }}"
+          echo "CHILD yaml=${{ remote.yaml }}"
+
+      - name: a local subworkflow inherits the closest remote ancestor, this child
+        uses: workflow/remote-context-local-child
+on:
+  execute:
+    inputs: {}
