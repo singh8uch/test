@@ -1,0 +1,21 @@
+# Fixture for the ${{ remote.* }} expression context (CORE-4858).
+# Lives on singh8uch/test@main and calls two marketplace items: one published from a
+# repository, one published from inline YAML. The remote one must report its own
+# repository; the local one has none, so it must report this workflow's.
+jobs:
+  mp_parent:
+    steps:
+      - name: parent reports its own remote context
+        run: |
+          echo "MPPARENT repo=${{ remote.repo }}"
+          echo "MPPARENT branch=${{ remote.branch }}"
+          echo "MPPARENT yaml=${{ remote.yaml }}"
+
+      - name: a remote-subtype marketplace item reports its own
+        uses: marketplace/remote-ctx-mp-remote
+
+      - name: a local-subtype marketplace item inherits this workflow's
+        uses: marketplace/remote-ctx-mp-local
+on:
+  execute:
+    inputs: {}
