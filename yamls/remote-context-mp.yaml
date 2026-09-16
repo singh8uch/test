@@ -2,6 +2,13 @@
 # Lives on singh8uch/test@main and calls two marketplace items: one published from a
 # repository, one published from inline YAML. The remote one must report its own
 # repository; the local one has none, so it must report this workflow's.
+#
+# The two items are not left published. Recreate them before running this:
+#   POST /api/marketplace/remote-workflow  slug=remote-ctx-mp-remote
+#     repo=https://github.com/singh8uch/privatetest branch=remote-context
+#     yaml=yamls/remote-context-leaf.yaml
+#   POST /api/marketplace/local-workflow   slug=remote-ctx-mp-local
+#     yaml=<the body of yamls/remote-context-leaf.yaml>
 jobs:
   mp_parent:
     steps:
