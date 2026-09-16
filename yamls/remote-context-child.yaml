@@ -10,6 +10,9 @@ jobs:
           echo "CHILD branch=${{ remote.branch }}"
           echo "CHILD yaml=${{ remote.yaml }}"
 
+      - name: child remote context resolved at the executor
+        run: echo "CHILD runtime=${{ remote.branch + env.PW_JOB_NUMBER }} (job ${PW_JOB_NUMBER})"
+
       - name: a local subworkflow inherits the closest remote ancestor, this child
         uses: workflow/remote-context-local-child
 on:
